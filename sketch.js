@@ -1,7 +1,13 @@
 
 
-var Adata = function(height) {
-  this.height = height;
+var Adata = function(localHeight) {
+  this.height = localHeight;
+  this.width = 10;
+  this.renderRect = function(x) {
+    // x,y,w,h
+    fill("#bada55")
+    rect(x,height,this.width,this.height * -5)
+  }
 }
 
 var dataLength = data.length;
@@ -16,9 +22,10 @@ function setup() {
 
 function draw() {
   background('#333');
-  // for (item in dataArr){
-  // }
+  for (var i = 0; i < dataArr.length; i++){
+    dataArr[i].renderRect(i * 10)
+  }
 
   fill("#fefefe")
-  text("Intro text", 250, 250);
+  text("Intro text", 20, 100);
 }
