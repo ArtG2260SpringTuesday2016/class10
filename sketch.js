@@ -9,7 +9,6 @@ var Adata = function(localHeight) {
   this.height = localHeight;
   this.width = 10;
   this.dramaticHeight = this.height * -5
-  this.x;
 
   var circleWidth = this.width * 2
 
@@ -23,20 +22,19 @@ var Adata = function(localHeight) {
     ellipse((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth)
   };
 
-  this.isMouseClose = function(posnX, posnY) {
-    if (dist(posnX, posnY, this.x, height + this.dramaticHeight) < circleWidth)
+  this.isMouseCloseToCircle = function(posnX, posnY, x) {
+    if (dist(posnX, posnY, x, height + this.dramaticHeight) < circleWidth) {
       dataValueText = this.height
+    }
   }
 
   this.render = function(iterator) {
-    this.x = iterator * 10;
-    this.renderRect(this.x)
-    this.renderCircleTop(this.x)
-    this.isMouseClose(mouseX, mouseY)
+    var x = iterator * 10;
+    this.renderRect(x)
+    this.renderCircleTop(x)
+    this.isMouseCloseToCircle(mouseX, mouseY, x)
   }
-
 }
-
 
 function setup() {
   for (var i = 0; i < dataLength; i++) {
