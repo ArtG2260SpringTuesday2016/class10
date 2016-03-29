@@ -2,6 +2,7 @@ var dataLength = data.length;
 var dataArr = [];
 var dataArrLength = dataArr.length;
 var dataValueText = "Hover over match stick head to see values";
+var hit = false;
 
 
 var Adata = function(localHeight) {
@@ -44,6 +45,9 @@ function setup() {
 }
 
 function draw() {
+ 
+ hit = collidePointRect(mouseX, mouseY, (this.width * 2), (this.width * 2), this.width, this.dramaticHeight);
+ 
   background('#333');
   for (var i = 0; i < dataArrLength; i++){
     dataArr[i].render(i);
@@ -53,4 +57,9 @@ function draw() {
   textSize(22)
   // textFont("Bangers")
   text(dataValueText, 20, 100);
+  
+  if(hit){
+  fill('orange')
+  }
+  
 }
