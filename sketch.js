@@ -1,8 +1,10 @@
-
 var dataLength = data.length;
 var dataArr = [];
 var dataArrLength = dataArr.length;
 var dataValueText = "Hover over match stick head to see values";
+var hit = false;
+var rectColor="#bada55";
+var circleColor="hotpink";
 
 
 var Adata = function(localHeight) {
@@ -13,12 +15,12 @@ var Adata = function(localHeight) {
   var circleWidth = this.width * 2
 
   this.renderRect = function(x) {
-    fill("#bada55");
+    fill(rectColor);
     rect(x,height,this.width,this.dramaticHeight);
   };
 
   this.renderCircleTop = function(x) {
-    fill("hotpink");
+    fill(circleColor);
     ellipse((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth)
   };
 
@@ -44,6 +46,8 @@ function setup() {
   dataArrLength = dataArr.length;
 }
 
+//Stuff on screen?
+
 function draw() {
   background('#333');
   for (var i = 0; i < dataArrLength; i++){
@@ -52,6 +56,22 @@ function draw() {
 
   fill("#fefefe")
   textSize(22)
-  // textFont("Bangers")
+  textFont("Helvetica")
   text(dataValueText, 20, 100);
+  
+  ellipse(mouseX,mouseY,20,20)
+  
+  hit = collideCircleCircle(mouseX,mouseY,20,304,220,20)
+//  hit = collideCircleCircle(mouseX,mouseY,10,166,220,10)
+//  hit = collideCircleCircle(mouseX,mouseY,10,26,220,10)
+  
+  if(hit){
+    circleColor="blue"
+    print("colliding? " + hit);
+  }else {
+    circleColor="hotpink"
+    fill('green');
+  }
+  print(mouseX)
 }
+
