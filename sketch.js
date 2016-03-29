@@ -1,33 +1,54 @@
 var Adata = function(localHeight){
   this.height = localHeight;
   this.width = 10;
-  this.dramaticHeight =this.height * -5;
+  this.dramaticHeight =this.height * 5;
   this.x;
   
   var circleWidth = this.width * 2;
   
-  this.renderRect = function(x){
+  this.circlePosnX = function(x){
+    return x +(this.width/2)
+  };
+  
+  this.figureOutRect = function(x){
+    rectObject = {}
+    rectObject.x = x;
+    rectObject.y = height - this.dramaticHeight;
+    rectObject.width = this.width;
+    rectObject.height = this.dramaticHeight;
+    return rectObject;
+  }
+  
+  this.renderRect = function(ourRectObject){
     fill("#bada55")
-    rect(x,height,this.width,this.dramaticHeight);
+    rect(ourRectObject.x,ourRectObject.y,ourRectObject.width,ourRectObject.height);
   };
   
   this.renderCircleTop = function(x){
     fill("hotpink");
-    ellipse(x + (this.width/2), height + this.dramaticHeight, circleWidth, circleWidth);
+    ellipse(this.circlePosnX(x), height - this.dramaticHeight, circleWidth, circleWidth);
   };
  
   
-  this.isMouseCloseToCircle = function(posnX, posnY){
-    if( dist(posnX, posnY, this.x, height+this.dramaticHeight) < circleWidth){
+  this.isMouseOnCircle = function(x){
+    if(collidePointCircle(this.circlePosnX(x), height - this.dramaticHeight, circleWidth, circleWidth, mouseX, mouseY, 0)){
+     dataValueText = this.height
+    }
+  };
+  
+  this.isMouseOnRect = function(ourRectObject){
+    if(collidePointRect(mouseX,mouseY,ourRectObject.x,ourRectObject.y,ourRectObject.width,ourRectObject.height)){
      dataValueText = this.height
     }
   };
   
   this.render = function(i) {
     this.x = i * 10;
-    this.renderRect(this.x);
+    var ourRect = this.figureOutRect(this.x);
+    this.renderRect(ourRect);
     this.renderCircleTop(this.x);
-    this.isMouseCloseToCircle(mouseX, mouseY);
+    this.isMouseOnCircle(this.x);
+    this.isMouseOnRect(ourRect);
   };
 }
 
@@ -53,11 +74,11 @@ function draw() {
   for (var i=0; i<dataArrLength; i++){
     dataArr[i].render(i);
     
-    hit = collidePointRect(mouseX,mouseY,x,height,this.width,this.dramaticHeight);
+  //  hit = collidePointRect(mouseX,mouseY,x,height,this.width,this.dramaticHeight);
     
-    if(hit){
-		  dataValueText = this.height
-    }
+  //  if(hit){
+	//	  dataValueText = this.height
+  //  }
   }  
   
   fill("#fefefe");
