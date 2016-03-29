@@ -23,7 +23,7 @@ var Adata = function(localHeight) {
   };
 
   this.isMouseCloseToCircle = function(posnX, posnY, x) {
-    if (dist(posnX, posnY, x, height + this.dramaticHeight) < circleWidth) {
+    if (collidePointCircle(posnX, posnY, x, height + this.dramaticHeight, this.width, circleWidth, circleWidth)) {
       dataValueText = this.height
     }
   }
@@ -46,7 +46,6 @@ function setup() {
 
 function draw() {
  
- hit = collidePointRect(mouseX, mouseY, (this.width * 2), (this.width * 2), this.width, this.dramaticHeight);
  
   background('#333');
   for (var i = 0; i < dataArrLength; i++){
@@ -58,8 +57,5 @@ function draw() {
   // textFont("Bangers")
   text(dataValueText, 20, 100);
   
-  if(hit){
-  fill('orange')
-  }
   
 }
