@@ -22,17 +22,18 @@ var Adata = function(localHeight) {
     ellipse((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth)
   };
 
-  this.isMouseCloseToCircle = function(posnX, posnY, x) {
-    if (dist(posnX, posnY, x, height + this.dramaticHeight) < circleWidth) {
+  this.isMouseOnCircle = function(x) {
+    if (collideRectCircle((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth,mouseX, mouseY, 0)) {
       dataValueText = this.height
     }
   }
 
   this.render = function(iterator) {
     var x = iterator * 10;
-    this.renderRect(x)
-    this.renderCircleTop(x)
-    this.isMouseCloseToCircle(mouseX, mouseY, x)
+    this.renderRect(x);
+    this.renderCircleTop(x);
+    this.isMouseOnCircle(x);
+    this.isMouseOnRect(x);
   }
 }
 
