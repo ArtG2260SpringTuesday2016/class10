@@ -8,25 +8,31 @@ var dataValueText = "Hover over match stick head to see values";
 var Adata = function(localHeight) {
   this.height = localHeight;
   this.width = 10;
-  this.dramaticHeight = this.height * -5
+  this.dramaticHeight = this.height * 5
 
   var circleWidth = this.width * 2
 
   this.renderRect = function(x) {
     fill("#bada55");
-    rect(x,height,this.width,this.dramaticHeight);
+    rect(x,height - this.dramaticHeight,this.width,this.dramaticHeight);
+  };
+
+  this.isMouseOnRect = function(x) {
+    if (collidePointRect(mouseX,mouseY,x,height - this.dramaticHeight,this.width,this.dramaticHeight)) {
+      dataValueText = this.height
+    }
   };
 
   this.renderCircleTop = function(x) {
     fill("hotpink");
-    ellipse((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth)
+    ellipse((x) + (this.width / 2), height - this.dramaticHeight, circleWidth, circleWidth)
   };
 
   this.isMouseOnCircle = function(x) {
-    if (collideRectCircle((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth,mouseX, mouseY, 0)) {
+    if (collidePointCircle(mouseX,mouseY,(x) + (this.width / 2), height - this.dramaticHeight, circleWidth )) {
       dataValueText = this.height
     }
-  }
+  };
 
   this.render = function(iterator) {
     var x = iterator * 10;
