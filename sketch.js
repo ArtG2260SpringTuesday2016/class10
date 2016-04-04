@@ -19,11 +19,11 @@ var Adata = function(localHeight) {
     rect(x,height,this.width,this.dramaticHeight);
   };
 
-  this.isMouseOnRect=function(x){
-    if(collidePointRect(mouseX,mouseY,x,height-this.dramaticHeight,this.width, this.dramaticHeight)){
-      dataValueText=this.height
-    }
-  }
+//  this.isMouseOnRect=function(x){
+//    if(collidePointRect(mouseX,mouseY,x,height-this.dramaticHeight,this.width, this.dramaticHeight)){
+//      dataValueText=this.height
+//    }
+//  }
   
   this.renderCircleTop = function(x) {
     fill(circleColor);
@@ -38,6 +38,8 @@ var Adata = function(localHeight) {
 
   this.render = function(iterator) {
     var x = iterator * 10;
+//refers to line 17, 28, 33? What's the affect of includine "this.___" below?
+//no isMouseOnRect? (line 22)
     this.renderRect(x)
     this.renderCircleTop(x)
     this.isMouseOnCircle(x)
@@ -52,8 +54,6 @@ function setup() {
   dataArrLength = dataArr.length;
 }
 
-//Stuff on screen?
-
 function draw() {
   background('#333');
   for (var i = 0; i < dataArrLength; i++){
@@ -67,17 +67,17 @@ function draw() {
   
   ellipse(mouseX,mouseY,20,20)
   
-//  hit = collideCircleCircle(mouseX,mouseY,20,304,220,20)
-//  hit = collideCircleCircle(mouseX,mouseY,10,166,220,10)
-//  hit = collideCircleCircle(mouseX,mouseY,10,26,220,10)
+    hit = collideCircleCircle(mouseX,mouseY,20,306,220,20)
+    hit = collideCircleCircle(mouseX,mouseY,10,166,220,20)
+    hit = collideCircleCircle(mouseX,mouseY,10,25,220,20)
   
-//  if(hit){
-//    circleColor="blue"
-//    print("colliding? " + hit);
-//  }else {
-//    circleColor="hotpink"
-//    fill('green');
-//  }
-//  print(mouseX)
+  if(hit){
+    circleColor="blue"
+    print("colliding? " + hit);
+  }else {
+    circleColor="hotpink"
+    fill('green');
+  }
+  print(mouseX)
 }
 
