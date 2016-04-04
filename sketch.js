@@ -19,13 +19,19 @@ var Adata = function(localHeight) {
     rect(x,height,this.width,this.dramaticHeight);
   };
 
+  this.isMouseOnRect=function(x){
+    if(collidePointRect(mouseX,mouseY,x,height-this.dramaticHeight,this.width, this.dramaticHeight)){
+      dataValueText=this.height
+    }
+  }
+  
   this.renderCircleTop = function(x) {
     fill(circleColor);
     ellipse((x) + (this.width / 2), height + this.dramaticHeight, circleWidth, circleWidth)
   };
 
-  this.isMouseCloseToCircle = function(posnX, posnY, x) {
-    if (dist(posnX, posnY, x, height + this.dramaticHeight) < circleWidth) {
+  this.isMouseOnCircle = function(x) {
+    if (collidePointCircle(mouseX,mouseY,(x)+(this.width/2), height-this.dramaticHeight, circleWidth)) {
       dataValueText = this.height
     }
   }
@@ -34,7 +40,7 @@ var Adata = function(localHeight) {
     var x = iterator * 10;
     this.renderRect(x)
     this.renderCircleTop(x)
-    this.isMouseCloseToCircle(mouseX, mouseY, x)
+    this.isMouseOnCircle(x)
   }
 }
 
@@ -61,17 +67,17 @@ function draw() {
   
   ellipse(mouseX,mouseY,20,20)
   
-  hit = collideCircleCircle(mouseX,mouseY,20,304,220,20)
+//  hit = collideCircleCircle(mouseX,mouseY,20,304,220,20)
 //  hit = collideCircleCircle(mouseX,mouseY,10,166,220,10)
 //  hit = collideCircleCircle(mouseX,mouseY,10,26,220,10)
   
-  if(hit){
-    circleColor="blue"
-    print("colliding? " + hit);
-  }else {
-    circleColor="hotpink"
-    fill('green');
-  }
-  print(mouseX)
+//  if(hit){
+//    circleColor="blue"
+//    print("colliding? " + hit);
+//  }else {
+//    circleColor="hotpink"
+//    fill('green');
+//  }
+//  print(mouseX)
 }
 
