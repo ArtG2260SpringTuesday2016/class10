@@ -47,6 +47,13 @@ function setup() {
 }
 
 function draw() {
+var check = collidePointRect(mouseX,mouseY,x,height+this.dramaticHeight,this.width,-this.dramaticHeight);
+	if(check){ //change color!
+		fill('blue')
+	}else{
+		fill('hotpink');
+	}
+
   background('#333');
   for (var i = 0; i < dataArrLength; i++){
     dataArr[i].render(i);
